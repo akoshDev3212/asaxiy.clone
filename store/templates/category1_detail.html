@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ category.title }} ichidagi mahsulotlar</h2>
+
+<div class="row">
+  {% for product in products %}
+    <div class="col-md-3 mb-4">
+      <div class="card h-100">
+        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.title }}</h5>
+          <p class="card-text">{{ product.snippet }}</p>
+          <a href="{% url 'products_detail' product.slug %}" class="btn btn-primary">Batafsil</a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p>Bu kategoriyada hozircha mahsulot yo'q.</p>
+  {% endfor %}
+</div>
+{% endblock %}
