@@ -11,5 +11,5 @@ def store(request):
 
 def products_detail(requist,slug):
     product = Products.objects.get(slug=slug)
-    return render(requist, 'products_detail.html', {'product': product})
+    return render(requist, 'produc_detail.html', {'product': product})
     
