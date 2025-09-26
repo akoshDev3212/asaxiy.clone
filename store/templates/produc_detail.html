@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  /* Rasmni kichraytirish */
+  .image img {
+    max-width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Tugmalarni chiroyli qilish */
+  .button.is-rounded {
+    background: linear-gradient(135deg, #4f93f7, #367af6);
+    border: none;
+    color: white;
+    padding: 0.5rem 0.9rem;
+    font-size: 1rem;
+    border-radius: 50px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .button.is-rounded:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  }
+
+  /* Submit tugmasi */
+  #order .button.is-info {
+    background: linear-gradient(135deg, #00c4a7, #00a894);
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  #order .button.is-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  }
+
+  /* Input maydoni */
+  #order .input {
+    width: 60px;
+    text-align: center;
+    margin: 0 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+</style>
+
+
+<section class="section">
+    <div class="tile is-ancestor is-centered">
+        <div class="tile is-parent is-4">
+            <div class="box">
+                <figure class="image">
+                    <img src="{{ product.image.url }}" alt="">
+                </figure>
+            </div>
+        </div>
+        <div class="tile is-parent is-vertical">
+            <div class="tile is-child">
+                <div class="box">
+                    <h1 class="title">
+                        {{ product.title }}
+                    </h1>
+                    <hr>
+                    <p class="subtitle is-6">
+                        {{ product.description }}
+                    </p>
+                    <h1 class="title mt-1 is-4">{{ product.prince }}$</h1>
+                    <p class="subtitle mt-1 is-6">Количество:</p>
+                    <div class="level">
+                        <div class="level-right">
+                            <div class="level-item">
+                                <button id="plus" class="button is-rounded is-small" onclick="plus()">+</button>
+                            </div>
+                            <div class="level-item">
+                                <form action="" id="order">
+                                    <input type="text" class="input" value="0" name="count">
+                                    <button type="submit" class="button is-info">Оформить заказ</button>
+                                </form>
+                            </div>
+                            <div class="level-item">
+                                <button id="minus" class="button is-rounded is-small" onclick="minus()">–</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    let form = document.querySelector('#order')
+    let minusButton = document.querySelector('#minus')
+
+    function plus (){
+        form.count.value++
+        minusButton.removeAttribute('disabled')
+    }
+
+    function minus() {
+        if (form.count.value > 0) {
+            form.count.value--
+        } else {
+            minusButton.setAttribute('disabled', '')
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block slider %}
+<!-- Bulma carousel CSS va JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/css/bulma-carousel.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/js/bulma-carousel.min.js"></script>
+
+<style>
+  /* Karusel dizayni */
+  #carousel-demo {
+    width: 90%;
+    max-width: 900px;
+    margin: 30px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  #carousel-demo img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Navigatsiya tugmalari */
+  .carousel-nav-left,
+  .carousel-nav-right {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .carousel-nav-left:hover,
+  .carousel-nav-right:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .carousel-nav-left ion-icon,
+  .carousel-nav-right ion-icon {
+    color: #fff;
+    font-size: 24px;
+  }
+</style>
+
+<!-- 📸 Karusel -->
+<div id="carousel-demo" class="carousel">
+  {% for slide in slides %}
+  <div class="item-{{ forloop.counter }}">
+    <img src="{{ slide.image.url }}" alt="Slide {{ forloop.counter }}">
+  </div>
+  {% endfor %}
+</div>
+{% endblock slider %}
+
+
+{% block content %}
+<!-- 🛍️ Mahsulotlar qismi -->
+<div class="tile is-parent is-9">
+  <div class="columns is-vcentered is-multiline">
+    {% for product in products %}
+      <div class="column is-one-quarter"> <!-- har qatorda 4 ta mahsulot -->
+        <div class="card card-product">
+          <a href="{% url 'store:products_detail' product.slug %}">
+            <div class="card-image">
+              <figure class="image">
+                <img src="{{ product.image.url }}" alt="Mahsulot rasmi">
+              </figure>
+            </div>
+          </a>
+
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-6">{{ product.shorten }}</p>
+              </div>
+            </div>
+
+            <div class="content">
+              <p class="subtitle is-7">{{ product.snippet }}</p>
+              <time class="subtitle is-7" datetime="2016-1-1">{{ product.date }}</time>
+            </div>
+
+            <div class="columns">
+              <div class="column">{{ product.price }} so'm</div>
+              <div class="column has-text-right">
+                <a href="{% url 'store:store' %}?product={{ product.id }}">
+                  <ion-icon name="cart-outline" class="order"></ion-icon>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<hr>
+{% endblock content %}
