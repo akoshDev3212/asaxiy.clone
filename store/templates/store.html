@@ -150,8 +150,8 @@
           <div class="card-footer">
             <strong>{{ product.price }} so'm</strong>
             <!-- 🛒 Savatchaga qo‘shish tugmasi -->
-            <a href="{% url 'store:store' %}?product={{ product.id }}" class="add-to-cart">
-              <ion-icon name="cart-outline"></ion-icon> Savatchaga
+            <a href="{% url 'store:store' %}?product={{ product.id }}">
+              <ion-icon name="cart-outline" class="order"></ion-icon>
             </a>
           </div>
         </div>

@@ -75,10 +75,11 @@
       <a class="nav-link-custom" href="#">Bosh sahifa</a>
 
       <!-- 🛒 Savat tugmasi -->
-      <a href="{% url 'store:cart' %}" class="cart-btn">
-        <ion-icon name="cart-outline"></ion-icon>
-        Savat
-      </a>
+      <div class="navbar-actions">
+          <a href="{% url 'store:cart' %}?cart=true">
+            <ion-icon name="cart-outline"></ion-icon> Savat
+          </a>
+      </div>
     </div>
 
     <div>

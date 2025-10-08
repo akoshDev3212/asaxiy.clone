@@ -8,10 +8,10 @@ class Slide(models.Model):
 
     def __str__(self):
         return self.title
-
-
-
+    
+    
 class Products(models.Model):
+    category = models.ForeignKey('store.Category', on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     slug = models.CharField(max_length=255)
@@ -36,7 +36,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
-
+    
 
 class CartItem(models.Model):
     customer = models.ForeignKey('Users.User', on_delete=models.SET_NULL, null=True)

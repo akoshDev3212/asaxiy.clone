@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
 {% block content %}
@@ -40,8 +41,13 @@
                             <td>
                                 {{ item.quantity }}
                                 <div class="quantity ml-3">
+                                    <a href="{% url 'store:edit_cart_item' item.id %}?action=add">
+                                        <img src="{% static '/img/up-arrow.png' %}" class="arrows" width="20px" height="20px" alt="">
+                                    </a>
 
-                                  
+                                    <a href="{% url 'store:edit_cart_item' item.id %}?action=take">
+                                        <img src="{% static '/img/down-arrow.png' %}" width="20px" height="20px" class="arrows" alt="">
+                                    </a>
                                 </div>
                             </td>
                             <td>{{ item.total_price }} sum</td>
