@@ -15,61 +15,184 @@
       min-height: 100vh;
       background-color: white;
       color: #1D1D1D;
-      font-family: sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
     }
 
+    /* 🌟 NAVBAR STYLING */
+    nav.navbar {
+      background: linear-gradient(90deg, #0d6efd, #6610f2);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      padding: 12px 40px;
+      border-bottom: 2px solid rgba(255,255,255,0.15);
+    }
+
     .b1 {
       display: flex;
-      gap: 80px;
-      margin-left: 130px;
+      gap: 60px;
+      margin-left: 100px;
       align-items: center;
     }
 
     .nav-link-custom {
-      color: white;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 4px;
       text-decoration: none;
-      transition: color 0.2s ease;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link-custom::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #fff;
+      transition: 0.3s;
     }
 
     .nav-link-custom:hover {
-      color: rgb(200, 200, 200);
+      color: #e0e0e0;
+    }
+
+    .nav-link-custom:hover::after {
+      width: 100%;
     }
 
     main {
       padding-top: 20px;
     }
 
-    /* 🛒 Savat tugmasi dizayni */
-    .cart-btn {
+    /* 🛒 Savat tugmasi */
+    .navbar-actions a {
       position: relative;
       display: inline-flex;
       align-items: center;
-      background: #0d6efd;
-      color: #fff;
-      padding: 6px 14px;
-      border-radius: 30px;
+      background: #fff;
+      color: #0d6efd;
+      padding: 7px 16px;
+      border-radius: 50px;
       text-decoration: none;
+      font-weight: 600;
       font-size: 16px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
       transition: 0.3s;
     }
 
-    .cart-btn:hover {
-      background: #0b5ed7;
-      color: #fff;
+    .navbar-actions a:hover {
+      background: #eaf1ff;
       transform: translateY(-2px);
     }
 
-    .cart-btn ion-icon {
+    .navbar-actions ion-icon {
       font-size: 22px;
-      margin-right: 6px;
+      margin-right: 8px;
+    }
+
+    /* 👤 User ismi va tugmalar */
+    .text-white.me-3 {
+      font-size: 17px;
+      font-weight: 500;
+      margin-right: 15px !important;
+    }
+
+    .btn-outline-light.btn-sm {
+      border-radius: 30px;
+      padding: 6px 14px;
+      transition: 0.3s;
+    }
+
+    .btn-outline-light.btn-sm:hover {
+      background: #fff;
+      color: #0d6efd;
+    }
+
+    .btn-light.btn-sm {
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .btn-light.btn-sm:hover {
+      background: #f0f0f0;
+    }
+
+    /* 🌟 SLIDER DIZAYNI */
+    #carousel-demo {
+      width: 90%;
+      max-width: 1100px;
+      margin: 40px auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    #carousel-demo .carousel-item img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.5s ease;
+    }
+
+    #carousel-demo .carousel-item img:hover {
+      transform: scale(1.03);
+      filter: brightness(1.1);
+    }
+
+    /* 🔘 Indicatorlar */
+    #carousel-demo .carousel-indicators [data-bs-target] {
+      background-color: #ffffff;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin: 0 5px;
+      opacity: 0.7;
+      transition: 0.3s;
+    }
+
+    #carousel-demo .carousel-indicators .active {
+      background-color: #0d6efd;
+      opacity: 1;
+      transform: scale(1.3);
+    }
+
+    /* ⬅️➡️ Tugmalar */
+    #carousel-demo .carousel-control-prev-icon,
+    #carousel-demo .carousel-control-next-icon {
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      padding: 15px;
+      transition: 0.3s;
+    }
+
+    #carousel-demo .carousel-control-prev-icon:hover,
+    #carousel-demo .carousel-control-next-icon:hover {
+      background-color: rgba(0,0,0,0.8);
+      transform: scale(1.1);
+    }
+
+    /* 📱 Responsive */
+    @media (max-width: 768px) {
+      #carousel-demo {
+        width: 95%;
+      }
+
+      #carousel-demo .carousel-item img {
+        height: 300px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <nav class="navbar navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-dark">
     <div class="b1">
       <a class="nav-link-custom" href="#">Aloqa</a>
       <a class="nav-link-custom" href="#">Bosh sahifa</a>
@@ -93,14 +216,46 @@
     </div>
   </nav>
 
-  {% block slider %}{% endblock slider %}
+  {% block slider %}
+  <!-- 📸 Misol uchun slider (id muhim: carousel-demo) -->
+  <div id="carousel-demo" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carousel-demo" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#carousel-demo" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#carousel-demo" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'images/slide1.jpg' %}" alt="Slide 1">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/slide2.jpg' %}" alt="Slide 2">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/slide3.jpg' %}" alt="Slide 3">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-demo" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel-demo" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+  {% endblock slider %}
 
   <main class="container mt-4">
     {% block content %}{% endblock %}
   </main>
 
+  <!-- 🔥 Ikonkalar -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- 🛠 Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+  <!-- ❗ Slayder scriptini o‘zgartirmadik -->
   <script>
       bulmaCarousel.attach('#carousel-demo', {
           slidesToScroll: 1,
